@@ -1,22 +1,22 @@
-// scrollProgress by jeremias Menichelli - MIT License
+// scrollProgress by Jeremias Menichelli - MIT License
 scrollProgress = (function(document, body, undefined){
 	var progress = 0
 	, progressWrapper
 	, progressElement
 	, config
+	, endPoint
 	// set flag
 	, isSet = false;
 
 	var _init = function(el){
 		var element = el || body;
-		var endPoint = _getElementGap(element);	
+		endPoint = _getElementGap(element);	
 
 		if (!isSet) _set();
 
-		window.onscroll = function(){
-			progress = (window.scrollY / endPoint)*100;
-			progressElement.style.width = progress+'%';
-		}
+		_updateMetrics(element);
+		window.onscroll = _setProgress;
+		window.onresize = _updateMetrics.bind(null, element);
 	}
 
 	var _createElements = function(){
@@ -34,8 +34,8 @@ scrollProgress = (function(document, body, undefined){
 		// default configuration object
 		config = {
 			bottom : false,
-			color : '000000',
-			height : '5',
+			color : '#000000',
+			height : '5px',
 			styles : true
 		};
 		// override with custom attributes
@@ -46,19 +46,14 @@ scrollProgress = (function(document, body, undefined){
 		}
 	}
 
-	var _getElementGap = function(element){
-		var end = element.scrollHeight - window.innerHeight;
-		return end;
-	}
-
 	var _setElementsStyles = function(custom){
 		// checks overrides
 		if (typeof custom == 'object') _setConfigObject(custom);
 		// checks styles flag
 		if (config.styles) {
 			// progress element
-			progressElement.style.backgroundColor = '#' + config.color;
-			progressElement.style.height = config.height + 'px';
+			progressElement.style.backgroundColor = config.color;
+			progressElement.style.height = config.height;
 			progressElement.style.width = '0';
 			// progress wrapper
 			progressWrapper.style.position = 'fixed';
@@ -79,6 +74,21 @@ scrollProgress = (function(document, body, undefined){
 		isSet = true;
 		// returns constructor object
 		return window.scrollProgress
+	}
+
+	var _setProgress = function(){
+		progress = (window.scrollY / endPoint)*100;
+		progressElement.style.width = progress+'%';
+	}
+
+	var _updateMetrics = function(el){
+		endPoint = _getElementGap(el);
+		_setProgress();
+	}
+
+	var _getElementGap = function(element){
+		var end = element.scrollHeight - window.innerHeight;
+		return end;
 	}
 
 	return {

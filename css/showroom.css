@@ -41,6 +41,7 @@ table {
 }
 
 body { 
+    background: #EEEEEE;
     color: #333333;
     font-size: 16px;
     line-height: 1;
@@ -49,13 +50,18 @@ body {
 header,
 section,
 footer {
-    padding: 10px;
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 50px;
 }
 
 h1 {
+    border-bottom: 7px #CCCCCC solid;
     font-size: 2em;
+    padding-bottom: 14px;
 }
 
 p {
-    line-height: 1.25em;
+    line-height: 1.5em;
+    margin-bottom: 40px;
 }
