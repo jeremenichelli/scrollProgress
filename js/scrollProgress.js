@@ -69,16 +69,26 @@ scrollProgress = (function(document, body, undefined){
 	}
 
 	var _set = function(custom){
-		_createElements();
-		_setElementsStyles(custom);
-		isSet = true;
-		// returns constructor object
-		return window.scrollProgress
+		if (!isSet){
+			_createElements();
+			_setElementsStyles(custom);
+			isSet = true;
+			// returns constructor object
+			return window.scrollProgress
+		} else {
+			return 'scrollProgress has already been set!';
+		}
 	}
 
 	var _setProgress = function(){
-		progress = (window.scrollY / endPoint)*100;
-		progressElement.style.width = progress+'%';
+		try {
+			var y = window.scrollY || window.pageYOffset;
+			progress = (y / endPoint)*100;
+		} catch(e) {
+			console.log(e);
+		} finally {
+			progressElement.style.width = progress+'%';
+		}
 	}
 
 	var _updateMetrics = function(el){
