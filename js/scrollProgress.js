@@ -49,16 +49,17 @@ scrollProgress = (function(document, body, undefined){
 	var _setElementsStyles = function(custom){
 		// checks overrides
 		if (typeof custom == 'object') _setConfigObject(custom);
+		// setting progress to zero and wrapper to full width
+		progressElement.style.width = '0';
+		progressWrapper.style.width = '100%';
 		// checks styles flag
 		if (config.styles) {
 			// progress element
 			progressElement.style.backgroundColor = config.color;
 			progressElement.style.height = config.height;
-			progressElement.style.width = '0';
 			// progress wrapper
 			progressWrapper.style.position = 'fixed';
 			progressWrapper.style.left = '0';
-			progressWrapper.style.width = '100%';
 			// sets position
 			if(config.bottom) {
 				progressWrapper.style.bottom = '0';
@@ -84,10 +85,9 @@ scrollProgress = (function(document, body, undefined){
 		try {
 			var y = window.scrollY || window.pageYOffset;
 			progress = (y / endPoint)*100;
+			progressElement.style.width = progress+'%';
 		} catch(e) {
 			console.log(e);
-		} finally {
-			progressElement.style.width = progress+'%';
 		}
 	}
 
