@@ -9,14 +9,12 @@ scrollProgress = (function(document, body, undefined){
 	, isSet = false;
 
 	var _init = function(el){
-		var element = el || body;
-		endPoint = _getElementGap(element);	
-
 		if (!isSet) _set();
 
-		_updateMetrics(element);
+		endPoint = _getEndPoint();
+		_updateMetrics();
 		window.onscroll = _setProgress;
-		window.onresize = _updateMetrics.bind(null, element);
+		window.onresize = _updateMetrics.bind(null);
 	}
 
 	var _createElements = function(){
@@ -39,16 +37,18 @@ scrollProgress = (function(document, body, undefined){
 			styles : true
 		};
 		// override with custom attributes
-		for (var key in config){
-			if(typeof obj[key] != 'undefined') {
-				config[key] = obj[key];
+		if (typeof obj == 'object'){
+			for (var key in config){
+				if(typeof obj[key] != 'undefined') {
+					config[key] = obj[key];
+				}
 			}
 		}
 	}
 
 	var _setElementsStyles = function(custom){
 		// checks overrides
-		if (typeof custom == 'object') _setConfigObject(custom);
+		_setConfigObject(custom);
 		// setting progress to zero and wrapper to full width
 		progressElement.style.width = '0';
 		progressWrapper.style.width = '100%';
@@ -92,12 +92,12 @@ scrollProgress = (function(document, body, undefined){
 	}
 
 	var _updateMetrics = function(el){
-		endPoint = _getElementGap(el);
+		endPoint = _getEndPoint(el);
 		_setProgress();
 	}
 
-	var _getElementGap = function(element){
-		var end = element.scrollHeight - window.innerHeight;
+	var _getEndPoint = function(){
+		var end = body.scrollHeight - window.innerHeight;
 		return end;
 	}
 
