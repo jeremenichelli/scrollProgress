@@ -10,7 +10,6 @@ scrollProgress = (function(document, body, undefined){
 
 	var _init = function(el){
 		if (!isSet) _set();
-
 		endPoint = _getEndPoint();
 		_updateMetrics();
 		window.onscroll = _setProgress;
@@ -91,8 +90,8 @@ scrollProgress = (function(document, body, undefined){
 		}
 	}
 
-	var _updateMetrics = function(el){
-		endPoint = _getEndPoint(el);
+	var _updateMetrics = function(){
+		endPoint = _getEndPoint();
 		_setProgress();
 	}
 
