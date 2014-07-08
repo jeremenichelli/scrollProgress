@@ -1,0 +1,26 @@
+{
+    "indent": 4,
+    "camelcase": true,
+    "immed": true,
+    "unused": true,
+    "es3": true,
+    "freeze": true,
+    "latedef": "nofunc",
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "undef": true,
+    "trailing": true,
+    "maxparams": 4,
+    "maxlen": 120,
+    "eqnull": true,
+    "laxcomma": true,
+    "globals": {
+        "window": true,
+        "console": true,
+        "document": true,
+        "module": true,
+        "define": true
+    }
+}

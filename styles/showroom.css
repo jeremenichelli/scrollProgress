@@ -42,7 +42,7 @@ table {
 
 body { 
     background: #EEEEEE;
-    color: #333333;
+    color: #3F3F3F;
     font-size: 16px;
     line-height: 1;
 }
@@ -55,6 +55,15 @@ footer {
     padding: 50px;
 }
 
+a {
+    color: #3F3F3F;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 h1 {
     border-bottom: 7px #CCCCCC solid;
     font-size: 2em;
@@ -62,6 +71,10 @@ h1 {
 }
 
 p {
-    line-height: 1.5em;
+    line-height: 1.75em;
     margin-bottom: 40px;
+}
+
+strong {
+    font-weight: 700;
 }

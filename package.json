@@ -1,0 +1,17 @@
+{
+  "name": "scrollProgress",
+  "title": "ScrollProgress.js",
+  "author": "Jeremias Menichelli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremenichelli/scrollProgress"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.5",
+    "gulp-rename": "^1.2.0",
+    "jshint-stylish": "^0.2.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-jshint": "^1.6.4",
+    "gulp-concat-util": "^0.2.3"
+  }
+}
