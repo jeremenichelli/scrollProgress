@@ -11,7 +11,7 @@ var paths = {
         test: 'test/spec/' + package.name + '.spec.js'
     },
     banner = {
-        top: '// ' + package.title + ' - ' + package.author + '\n' +
+        top: '// ' + package.title + ' - ' + package.author + ' - v' + package.version + '\n' +
             '// ' + package.repository.url + ' - MIT License\n'
     };
 

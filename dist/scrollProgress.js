@@ -1,4 +1,4 @@
-// ScrollProgress.js - Jeremias Menichelli
+// ScrollProgress.js - Jeremias Menichelli - v1.1.0
 // https://github.com/jeremenichelli/scrollProgress - MIT License
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -15,52 +15,50 @@
 
     var body = document.body,
         progress = 0,
+        isSet = false,
         progressWrapper,
         progressElement,
         config,
-        endPoint,
-        isSet = false;
+        endPoint;
 
     var _init = function(){
         if (!isSet) _set();
-        endPoint = _getEndPoint();
         _updateMetrics();
         window.onscroll = _setProgress;
         window.onresize = _updateMetrics.bind(null);
     };
 
-    var _createElements = function(){
+    var _createElements = function() {
         progressWrapper = document.createElement('div');
         progressElement = document.createElement('div');
 
-        progressWrapper.id = 'progressWrapper';
-        progressElement.id = 'progress';
+        progressWrapper.id = config.prefix + '-wrapper';
+        progressElement.id = config.prefix + '-element';
 
         progressWrapper.appendChild(progressElement);
         body.appendChild(progressWrapper);
     };
 
-    var _setConfigObject = function(obj){
+    var _setConfigObject = function(obj) {
         // default configuration object
         config = {
-            bottom : false,
-            color : '#000000',
-            height : '5px',
-            styles : true
+            bottom: false,
+            color: '#000000',
+            height: '5px',
+            styles: true,
+            prefix: 'progress'
         };
         // override with custom attributes
-        if (typeof obj == 'object'){
+        if (typeof obj === 'object'){
             for (var key in config){
-                if(typeof obj[key] != 'undefined') {
+                if(typeof obj[key] !== 'undefined') {
                     config[key] = obj[key];
                 }
             }
         }
     };
 
-    var _setElementsStyles = function(custom){
-        // checks overrides
-        _setConfigObject(custom);
+    var _setElementsStyles = function() {
         // setting progress to zero and wrapper to full width
         progressElement.style.width = '0';
         progressWrapper.style.width = '100%';
@@ -81,10 +79,13 @@
         }
     };
 
-    var _set = function(custom){
+    var _set = function(custom) {
         if (!isSet){
+            if (custom) {
+                _setConfigObject(custom);
+            }
             _createElements();
-            _setElementsStyles(custom);
+            _setElementsStyles();
             isSet = true;
             // returns constructor object
             return window.scrollProgress;
@@ -93,22 +94,22 @@
         }
     };
 
-    var _setProgress = function(){
+    var _setProgress = function() {
         try {
             var y = window.scrollY || window.pageYOffset;
-            progress = (y / endPoint)*100;
-            progressElement.style.width = progress+'%';
+            progress = (y / endPoint) * 100;
+            progressElement.style.width = progress + '%';
         } catch(e) {
-            console.log(e);
+            console.error(e);
         }
     };
 
-    var _updateMetrics = function(){
+    var _updateMetrics = function() {
         endPoint = _getEndPoint();
         _setProgress();
     };
 
-    var _getEndPoint = function(){
+    var _getEndPoint = function() {
         var end = body.scrollHeight - window.innerHeight;
         return end;
     };
