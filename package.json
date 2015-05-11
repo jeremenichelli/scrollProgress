@@ -1,14 +1,13 @@
 {
   "title": "scrollProgress",
-  "name": "scrollProgress",
-  "description": "Template JavaScript repository with Gulp work flow",
+  "name": "scrollprogress",
+  "description": "Small library that creates a progress bar that indicates how much you've scrolled on a website",
   "url": "https://github.com/jeremenichelli/scrollProgress",
   "author": "Jeremias Menichelli",
   "copyright": "2014",
   "version": "2.0.0",
   "license": "MIT",
   "main": "./dist/scrollProgress.js",
-  "url": "https://github.com/jeremenichelli/scrollProgress",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/jeremenichelli/scrollProgress.git"
@@ -17,6 +16,7 @@
     "test": "gulp test"
   },
   "devDependencies": {
+    "del": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-concat-util": "^0.5.2",
     "gulp-jscs": "^1.6.0",
@@ -37,5 +37,11 @@
   "homepage": "https://github.com/jeremenichelli/scrollProgress#readme",
   "directories": {
     "test": "test"
-  }
+  },
+  "keywords": [
+    "scroll",
+    "progress",
+    "reading",
+    "ui"
+  ]
 }

@@ -1,0 +1,29 @@
+{
+  "name": "scrollProgress",
+  "version": "2.0.0",
+  "homepage": "https://github.com/jeremenichelli/scrollProgress",
+  "authors": [
+    "Jeremias Menichelli"
+  ],
+  "description": "Small library that creates a progress bar that indicates how much you've scrolled on a website",
+  "main": "./dist/scrollProgress.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "gulpfile.js",
+    "test",
+    "src",
+    "tests"
+  ],
+  "keywords": [
+    "scroll",
+    "progress",
+    "reading",
+    "ui"
+  ]
+}
