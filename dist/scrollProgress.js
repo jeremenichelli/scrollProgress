@@ -1,5 +1,9 @@
-// ScrollProgress.js - Jeremias Menichelli - v1.1.0
-// https://github.com/jeremenichelli/scrollProgress - MIT License
+/*
+ * scrollProgress - v2.0.0
+ * https://github.com/jeremenichelli/scrollProgress
+ * 2014 (c) Jeremias Menichelli - MIT License
+*/
+
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(function() {
@@ -18,15 +22,16 @@
         isSet = false,
         progressWrapper,
         progressElement,
-        config,
-        endPoint;
-
-    var _init = function(){
-        if (!isSet) _set();
-        _updateMetrics();
-        window.onscroll = _setProgress;
-        window.onresize = _updateMetrics.bind(null);
-    };
+        endPoint,
+        // default configuration object
+        config = {
+            bottom: false,
+            color: '#000000',
+            height: '5px',
+            styles: true,
+            prefix: 'progress',
+            events: true
+        };
 
     var _createElements = function() {
         progressWrapper = document.createElement('div');
@@ -40,18 +45,10 @@
     };
 
     var _setConfigObject = function(obj) {
-        // default configuration object
-        config = {
-            bottom: false,
-            color: '#000000',
-            height: '5px',
-            styles: true,
-            prefix: 'progress'
-        };
         // override with custom attributes
-        if (typeof obj === 'object'){
-            for (var key in config){
-                if(typeof obj[key] !== 'undefined') {
+        if (typeof obj === 'object') {
+            for (var key in config) {
+                if (typeof obj[key] !== 'undefined') {
                     config[key] = obj[key];
                 }
             }
@@ -62,16 +59,20 @@
         // setting progress to zero and wrapper to full width
         progressElement.style.width = '0';
         progressWrapper.style.width = '100%';
-        // checks styles flag
+
+        // set styles only if
+        // settings is true
         if (config.styles) {
             // progress element
             progressElement.style.backgroundColor = config.color;
             progressElement.style.height = config.height;
+
             // progress wrapper
             progressWrapper.style.position = 'fixed';
             progressWrapper.style.left = '0';
+
             // sets position
-            if(config.bottom) {
+            if (config.bottom) {
                 progressWrapper.style.bottom = '0';
             } else {
                 progressWrapper.style.top = '0';
@@ -80,17 +81,27 @@
     };
 
     var _set = function(custom) {
-        if (!isSet){
+        // set only once
+        if (!isSet) {
             if (custom) {
                 _setConfigObject(custom);
             }
             _createElements();
             _setElementsStyles();
+
+            // set initial metrics
+            _updateMetrics();
+
+            // bind events only if
+            // settings is true
+            if (config.events) {
+                window.onscroll = _setProgress;
+                window.onresize = _updateMetrics.bind(null);
+            }
+
             isSet = true;
-            // returns constructor object
-            return window.scrollProgress;
         } else {
-            return 'scrollProgress has already been set!';
+            console.error('scrollProgress has already been set!');
         }
     };
 
@@ -99,7 +110,7 @@
             var y = window.scrollY || window.pageYOffset;
             progress = (y / endPoint) * 100;
             progressElement.style.width = progress + '%';
-        } catch(e) {
+        } catch (e) {
             console.error(e);
         }
     };
@@ -115,7 +126,8 @@
     };
 
     return {
-        init : _init,
-        set : _set
+        set: _set,
+        trigger: _setProgress,
+        update: _updateMetrics
     };
 });

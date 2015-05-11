@@ -1,18 +1,41 @@
 {
+  "title": "scrollProgress",
   "name": "scrollProgress",
-  "title": "ScrollProgress.js",
+  "description": "Template JavaScript repository with Gulp work flow",
+  "url": "https://github.com/jeremenichelli/scrollProgress",
   "author": "Jeremias Menichelli",
-  "version": "1.1.0",
+  "copyright": "2014",
+  "version": "2.0.0",
+  "license": "MIT",
+  "main": "./dist/scrollProgress.js",
+  "url": "https://github.com/jeremenichelli/scrollProgress",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeremenichelli/scrollProgress"
+    "url": "git+ssh://git@github.com/jeremenichelli/scrollProgress.git"
+  },
+  "scripts": {
+    "test": "gulp test"
   },
   "devDependencies": {
-    "gulp": "^3.8.5",
-    "gulp-rename": "^1.2.0",
-    "jshint-stylish": "^0.2.0",
-    "gulp-uglify": "^0.3.1",
-    "gulp-jshint": "^1.6.4",
-    "gulp-concat-util": "^0.2.3"
+    "gulp": "^3.8.11",
+    "gulp-concat-util": "^0.5.2",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.10.0",
+    "gulp-karma": "0.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "jasmine-core": "^2.2.0",
+    "jshint-stylish": "^1.0.1",
+    "karma": "^0.12.31",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-spec-reporter": "0.0.19"
+  },
+  "bugs": {
+    "url": "https://github.com/jeremenichelli/scrollProgress/issues"
+  },
+  "homepage": "https://github.com/jeremenichelli/scrollProgress#readme",
+  "directories": {
+    "test": "test"
   }
 }

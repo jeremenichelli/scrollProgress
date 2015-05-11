@@ -1,4 +1,7 @@
 {
+    "bitwise": true,
+    "curly": false,
+    "quotmark": "single",
     "indent": 4,
     "camelcase": true,
     "immed": true,
@@ -13,14 +16,20 @@
     "undef": true,
     "trailing": true,
     "maxparams": 4,
-    "maxlen": 120,
+    "maxlen": 125,
     "eqnull": true,
     "laxcomma": true,
     "globals": {
         "window": true,
-        "console": true,
         "document": true,
+        "expect": true,
+        "describe": true,
+        "it": true,
+        "beforeEach": true,
+        "afterEach": true,
+        "console": true,
+        "define": true,
         "module": true,
-        "define": true
+        "spyOn": true
     }
 }

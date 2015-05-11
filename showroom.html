@@ -31,17 +31,17 @@
 		<p>Praesent congue iaculis orci, vitae tempus orci accumsan ac. Nunc id nulla massa. Aliquam tincidunt quis mi et varius. Donec sagittis, orci id posuere porttitor, turpis arcu pulvinar odio, ac euismod tellus urna a massa. Fusce at enim risus. Nullam volutpat elementum nulla, sit amet fermentum neque iaculis eget. Maecenas ac nisi vulputate, pulvinar odio imperdiet, scelerisque sapien. Aenean non mi at turpis aliquam commodo sit amet et lectus. </p>
 	</section>
 	<footer>
-		2014 &copy; All rights reserved
+		2014 &copy; Jeremias Menichelli - MIT License
 	</footer>
-	<script src="dist/scrollProgress.min.js"></script>
+	<script src="dist/scrollProgress.js"></script>
 	<script>
-		scrollProgress
-			.set({
-				color : 'red',
-				bottom : true,
-				height : '12px'
-			})
-			.init()
+		scrollProgress.set({
+				height: '12px',
+				color: '#55BBEE',
+				events: false
+			});
+		window.onresize = scrollProgress.update;
+		window.onscroll = scrollProgress.trigger;
 	</script>
 </body>
 </html>
