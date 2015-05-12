@@ -7,19 +7,19 @@ Small library that creates a progress bar that indicates how much you've scrolle
 
 After you included the script in your project or just added a script tag with the file
 
-```
+```html
 <script src="js/scrollProgress.js"></script>
 ```
 
 It's also available on *bower*
 
-```
+```bash
 bower install scrollprogress --save-dev
 ```
 
 ... and *npm*
 
-```
+```bash
 npm install scrollprogress --save-dev
 ```
 
@@ -53,9 +53,9 @@ The only thing that the script will control will be the width of the bar as you 
 
 ### Events inside the script
 
-To be able to work, *scrollProgress* adds events when the window scrolls and when it gets resized so it update the numbers to keep it consistent. There's a chance that you're using this events in your page for other purposes. To prevent overrides in this events you can pass a flag called ```events``` with a ```false``` value.
+To be able to work, *scrollProgress* adds events when the window scrolls and when it gets resized so it update the numbers to keep it consistent. There's a chance that you're using this events in your page for other purposes.
 
-Then you have to call ```scrollProgress.trigger()``` on scroll and ```scrollProgress.update()```on resize to make sure the code works good.
+To prevent overrides in these events you can pass a flag called ```events``` with a ```false``` value. Then you have to call ```scrollProgress.trigger()``` on scroll and ```scrollProgress.update()```on resize to make sure the code works as expected.
 
 ```js
 scrollProgress.set({ events: false });
@@ -73,7 +73,7 @@ window.onresize = function() {
 
 ### Elements in your page
 
-The script appends two elements with the ids *progress-wrapper* and *progress-element*, but you can change this names by adding a ```prefix``` property to the configuration object.
+The script appends two elements with the ids *progress-wrapper* and *progress-element*, but you can change these names by adding a ```prefix``` property to the configuration object.
 
 ```js
 scrollProgress.set({ prefix: 'my-awesome-page-progress-bar' });
