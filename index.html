@@ -3,16 +3,61 @@
 <head>
 	<meta charset="UTF-8">
 	<title>scrollProgress showroom</title>
-	<link rel="stylesheet" href="styles/showroom.css">
+	    <style>
+	        body {
+	            background: #2550DF;
+	            color: #AACCFF;
+	        }
+
+	        header,
+	        section,
+	        footer {
+	        	max-width: 950px;
+	        	margin: 0 auto;
+	        	padding: 30px;
+	        }
+
+	        section p {
+	        	text-shadow: 0 0 4px #0022AA;
+	        }
+
+	        h1 {
+	        	border-color: #5FA0EF;
+	        	border-style: solid;
+	        	border-width: 0 0 4px;
+	        	color: #FFFFFF;
+	        	line-height: 1.5em;
+	        }
+
+	        a {
+	        	color: #FFFFFF;
+	        }
+
+	        #progress-wrapper {
+	        	position: fixed;
+	        	bottom: 0;
+	        	left: 0;
+	        }
+
+	        #progress-element {
+	        	background: #FFFFFF;
+	        	box-shadow: 1px 1px 5px #5FA0EF;
+	        	height: 12px;
+	        }
+	    </style>
 </head>
 <body>
 	<header>
 		<h1>scrollProgress showroom</h1>
 	</header>
 	<section class="main">
-		<p>
-			<strong>You will see a red progress bar on the bottom of the page tracking your scrolling. If you see any bugs leave them here: </strong><a href="https://github.com/jeremenichelli/scrollProgress">https://github.com/jeremenichelli/scrollProgress</a>
-		</p>
+		<div class="gap">
+			<p>Small library that creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post.</p>
+			<p>Scroll down and you'll see a progress bar on the bottom that will increase its width until you get to the end of the page.</p>
+			<p>
+				You can fork this project, download it and use it going to the <a href="https://github.com/jeremenichelli/scrollProgress">github&nbsp;repository</a>.
+			</p>
+		</div>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci. Integer tristique, tortor dapibus facilisis tincidunt, ante elit semper libero, in tincidunt arcu urna quis sem. In blandit urna metus, id pretium ipsum tincidunt non.
 		<p>Curabitur id tempor enim, nec lobortis justo. Curabitur erat augue, aliquet vel hendrerit id, pellentesque eu sapien. Sed auctor dictum sem sit amet dictum. Proin id lacus at nibh vestibulum tristique. Curabitur non blandit dolor, vitae sodales justo.</p>
 		<p>Suspendisse et vestibulum elit, eu porttitor ante. Phasellus vel sapien dui. Morbi interdum lacus vel arcu cursus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vitae tellus eu orci elementum imperdiet at nec nisi. Pellentesque hendrerit, tortor vel tempor dignissim, est nisi molestie nibh, a semper risus nunc quis felis.</p>
@@ -36,9 +81,9 @@
 	<script src="dist/scrollProgress.js"></script>
 	<script>
 		scrollProgress.set({
-				height: '12px',
-				color: '#55BBEE',
-				events: false
+				styles: false,
+				events: false,
+				bottom: true
 			});
 		window.onresize = scrollProgress.update;
 		window.onscroll = scrollProgress.trigger;

@@ -19,7 +19,7 @@
         endPoint,
         // default configuration object
         config = {
-            bottom: false,
+            bottom: true,
             color: '#000000',
             height: '5px',
             styles: true,

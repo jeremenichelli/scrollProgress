@@ -13,8 +13,8 @@
 
     // project paths
     var paths = {
-        src: './src/' + project.name + '.js',
-        spec: './test/' + project.name + '.spec.js',
+        src: './src/' + project.title + '.js',
+        spec: './test/' + project.title + '.spec.js',
         output: './dist'
     }
 

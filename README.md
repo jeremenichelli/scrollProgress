@@ -1,54 +1,93 @@
-scrollProgress
-==============
+# scrollProgress [![Build Status](https://travis-ci.org/jeremenichelli/scrollProgress.svg)](https://travis-ci.org/jeremenichelli/scrollProgress)
 
-This scripts creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post. Just add the script and call **scrollProgress.init()**, a black bar on the upper part of your website to show the scrolling progress. The script supports IE9+ and all modern browsers.
-
-
-Use
----
-
-After you included the script in your project or just added a script tag that may look like this:
-
- `<script src="js/scrollProgress.js"></script>`.
-
-Then just write **scrollProgress.init()** and a black progress bar on the top will track the scrolling.
+Small library that creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post.
 
 
-Configuration
--------------
+### Install
 
-If you want to change some attributes of the progress bar, you can do it directly when you call it! You can alter _height_, _color_ or put the bar on the bottom if you already have fixed content on the top of your website. You just have to do this:
+After you included the script in your project or just added a script tag with the file
 
-`scrollProgress.set({
-    color : '#FF9900',
-    height : '12px',
-    bottom : true
-});`
-`scrollProgress.init();`
+```
+<script src="js/scrollProgress.js"></script>
+```
 
-The default values are _#000000_, _5px_ and _false_.
+It's also available on *bower*
 
-_But what if you want to set the styles using css?_ In that case there's another parameter you can pass to the _set()_ function to deactivate the inline styles and set them by your own:
+```
+bower install scrollprogress --save-dev
+```
 
-`scrollProgress.set({
-    styles : false
-});`
-`scrollProgress.init();`
+... and *npm*
 
-----
-
-The script appends two elements, _#progressWrapper_ and _#progress_ so feel free to change the styles using CSS. Just be sure you're setting the **styles** property to **false** so scrollProgress doesn't write inline styles on the elements.
-
-Actually, it supports _chaining_... So after you set the configuration you can just initialize it like this:
-
-`scrollProgress
-	.set({
-	    color : '#33A5EF',
-	    height : '15px',
-	    bottom : true
-	}).init();`
-
-_Make sure to call the set function **before** the init function._
+```
+npm install scrollprogress --save-dev
+```
 
 
+### Use
+
+To start tracking the scroll progress on your project you just need to call the set method and a progress bar will appear at the bottom of the page as you move inside the page.
+
+```js
+scrollProgress.set();
+```
+
+You probably want to change the appearance of the bar like its height, color or position to match your page style. Well, good news! The *set* method supports this configurable options.
+
+```js
+scrollProgress.set({
+    color: '#FF9900',
+    height: '12px',
+    bottom: false
+});
+```
+
+What if you don't like inline styles and you want to handle the look of it in your CSS style sheet, then you just need to pass a *styles* flag and set it to ```false```.
+
+```js
+scrollProgress.set({ styles: false });
+```
+
+The only thing that the script will control will be the width of the bar as you scroll, the rest it's all on you. _Remember that the script won't put any style at all so make sure to position the bar as fixed in your page or you won't be able to see it._
+
+
+### Events inside the script
+
+To be able to work, *scrollProgress* adds events when the window scrolls and when it gets resized so it update the numbers to keep it consistent. There's a chance that you're using this events in your page for other purposes. To prevent overrides in this events you can pass a flag called ```events``` with a ```false``` value.
+
+Then you have to call ```scrollProgress.trigger()``` on scroll and ```scrollProgress.update()```on resize to make sure the code works good.
+
+```js
+scrollProgress.set({ events: false });
+
+window.onscroll = function() {
+    // some stuff you need to do on scroll
+    scrollProgress.trigger();  
+};
+
+window.onresize = function() {
+    // some stuff you need to do on resize
+    scrollProgress.update();  
+};
+```
+
+### Elements in your page
+
+The script appends two elements with the ids *progress-wrapper* and *progress-element*, but you can change this names by adding a ```prefix``` property to the configuration object.
+
+```js
+scrollProgress.set({ prefix: 'my-awesome-page-progress-bar' });
+```
+
+So now these will be the elements added to your page.
+
+```html
+<div id="my-awesomepage-progress-bar-wrapper">
+    <div id="my-awesomepage-progress-bar-element"></div>
+</div>
+```
+
+### Contribute
+
+Feel free to rise an issue or suggest a change that you think that can improve this code.
 
