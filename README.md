@@ -3,25 +3,7 @@
 Small library that creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post.
 
 
-### Install
-
-After you included the script in your project or just added a script tag with the file
-
-```html
-<script src="js/scrollProgress.js"></script>
-```
-
-It's also available on *bower*
-
-```bash
-bower install scrollprogress --save-dev
-```
-
-... and *npm*
-
-```bash
-npm install scrollprogress --save-dev
-```
+o
 
 
 ### Use

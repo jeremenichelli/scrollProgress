@@ -18,7 +18,8 @@
     "gulpfile.js",
     "test",
     "src",
-    "tests"
+    "tests",
+    "index.html"
   ],
   "keywords": [
     "scroll",

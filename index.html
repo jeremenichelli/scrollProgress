@@ -4,31 +4,482 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1,maximum-scale=1.0">
 	<title>scrollProgress</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+
 	    <style>
+			/*! normalize.css v3.0.2 | MIT License | github.com/necolas/normalize.css */
+
+			/**
+			 * 1. Set default font family to sans-serif.
+			 * 2. Prevent iOS text size adjust after orientation change, without disabling
+			 *    user zoom.
+			 */
+
+			html {
+			  font-family: sans-serif; /* 1 */
+			  -ms-text-size-adjust: 100%; /* 2 */
+			  -webkit-text-size-adjust: 100%; /* 2 */
+			}
+
+			/**
+			 * Remove default margin.
+			 */
+
+			body {
+			  margin: 0;
+			  padding: 0;
+			}
+
+			/* HTML5 display definitions
+			   ========================================================================== */
+
+			/**
+			 * Correct `block` display not defined for any HTML5 element in IE 8/9.
+			 * Correct `block` display not defined for `details` or `summary` in IE 10/11
+			 * and Firefox.
+			 * Correct `block` display not defined for `main` in IE 11.
+			 */
+
+			article,
+			aside,
+			details,
+			figcaption,
+			figure,
+			footer,
+			header,
+			hgroup,
+			main,
+			menu,
+			nav,
+			section,
+			summary {
+			  display: block;
+			}
+
+			/**
+			 * 1. Correct `inline-block` display not defined in IE 8/9.
+			 * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+			 */
+
+			audio,
+			canvas,
+			progress,
+			video {
+			  display: inline-block; /* 1 */
+			  vertical-align: baseline; /* 2 */
+			}
+
+			/**
+			 * Prevent modern browsers from displaying `audio` without controls.
+			 * Remove excess height in iOS 5 devices.
+			 */
+
+			audio:not([controls]) {
+			  display: none;
+			  height: 0;
+			}
+
+			/**
+			 * Address `[hidden]` styling not present in IE 8/9/10.
+			 * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+			 */
+
+			[hidden],
+			template {
+			  display: none;
+			}
+
+			/* Links
+			   ========================================================================== */
+
+			/**
+			 * Remove the gray background color from active links in IE 10.
+			 */
+
+			a {
+			  background-color: transparent;
+			}
+
+			/**
+			 * Improve readability when focused and also mouse hovered in all browsers.
+			 */
+
+			a:active,
+			a:hover {
+			  outline: 0;
+			}
+
+			/* Text-level semantics
+			   ========================================================================== */
+
+			/**
+			 * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+			 */
+
+			abbr[title] {
+			  border-bottom: 1px dotted;
+			}
+
+			/**
+			 * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+			 */
+
+			b,
+			strong {
+			  font-weight: 400;
+			}
+
+			/**
+			 * Address styling not present in Safari and Chrome.
+			 */
+
+			dfn {
+			  font-style: italic;
+			}
+
+			/**
+			 * Address variable `h1` font-size and margin within `section` and `article`
+			 * contexts in Firefox 4+, Safari, and Chrome.
+			 */
+
+			h1 {
+			  font-size: 2em;
+			  margin: 0.67em 0;
+			}
+
+			/**
+			 * Address styling not present in IE 8/9.
+			 */
+
+			mark {
+			  background: #ff0;
+			  color: #000;
+			}
+
+			/**
+			 * Address inconsistent and variable font size in all browsers.
+			 */
+
+			small {
+			  font-size: 80%;
+			}
+
+			/**
+			 * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+			 */
+
+			sub,
+			sup {
+			  font-size: 75%;
+			  line-height: 0;
+			  position: relative;
+			  vertical-align: baseline;
+			}
+
+			sup {
+			  top: -0.5em;
+			}
+
+			sub {
+			  bottom: -0.25em;
+			}
+
+			/* Embedded content
+			   ========================================================================== */
+
+			/**
+			 * Remove border when inside `a` element in IE 8/9/10.
+			 */
+
+			img {
+			  border: 0;
+			}
+
+			/**
+			 * Correct overflow not hidden in IE 9/10/11.
+			 */
+
+			svg:not(:root) {
+			  overflow: hidden;
+			}
+
+			/* Grouping content
+			   ========================================================================== */
+
+			/**
+			 * Address margin not present in IE 8/9 and Safari.
+			 */
+
+			figure {
+			  margin: 1em 40px;
+			}
+
+			/**
+			 * Address differences between Firefox and other browsers.
+			 */
+
+			hr {
+			  -moz-box-sizing: content-box;
+			  box-sizing: content-box;
+			  height: 0;
+			}
+
+			/**
+			 * Contain overflow in all browsers.
+			 */
+
+			pre {
+			  overflow: auto;
+			}
+
+			/**
+			 * Address odd `em`-unit font size rendering in all browsers.
+			 */
+
+			code,
+			kbd,
+			pre,
+			samp {
+			  font-family: monospace, monospace;
+			  font-size: 1em;
+			}
+
+			/* Forms
+			   ========================================================================== */
+
+			/**
+			 * Known limitation: by default, Chrome and Safari on OS X allow very limited
+			 * styling of `select`, unless a `border` property is set.
+			 */
+
+			/**
+			 * 1. Correct color not being inherited.
+			 *    Known issue: affects color of disabled elements.
+			 * 2. Correct font properties not being inherited.
+			 * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+			 */
+
+			button,
+			input,
+			optgroup,
+			select,
+			textarea {
+			  color: inherit; /* 1 */
+			  font: inherit; /* 2 */
+			  margin: 0; /* 3 */
+			}
+
+			/**
+			 * Address `overflow` set to `hidden` in IE 8/9/10/11.
+			 */
+
+			button {
+			  overflow: visible;
+			}
+
+			/**
+			 * Address inconsistent `text-transform` inheritance for `button` and `select`.
+			 * All other form control elements do not inherit `text-transform` values.
+			 * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+			 * Correct `select` style inheritance in Firefox.
+			 */
+
+			button,
+			select {
+			  text-transform: none;
+			}
+
+			/**
+			 * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+			 *    and `video` controls.
+			 * 2. Correct inability to style clickable `input` types in iOS.
+			 * 3. Improve usability and consistency of cursor style between image-type
+			 *    `input` and others.
+			 */
+
+			button,
+			html input[type="button"], /* 1 */
+			input[type="reset"],
+			input[type="submit"] {
+			  -webkit-appearance: button; /* 2 */
+			  cursor: pointer; /* 3 */
+			}
+
+			/**
+			 * Re-set default cursor for disabled elements.
+			 */
+
+			button[disabled],
+			html input[disabled] {
+			  cursor: default;
+			}
+
+			/**
+			 * Remove inner padding and border in Firefox 4+.
+			 */
+
+			button::-moz-focus-inner,
+			input::-moz-focus-inner {
+			  border: 0;
+			  padding: 0;
+			}
+
+			/**
+			 * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+			 * the UA stylesheet.
+			 */
+
+			input {
+			  line-height: normal;
+			}
+
+			/**
+			 * It's recommended that you don't attempt to style these elements.
+			 * Firefox's implementation doesn't respect box-sizing, padding, or width.
+			 *
+			 * 1. Address box sizing set to `content-box` in IE 8/9/10.
+			 * 2. Remove excess padding in IE 8/9/10.
+			 */
+
+			input[type="checkbox"],
+			input[type="radio"] {
+			  box-sizing: border-box; /* 1 */
+			  padding: 0; /* 2 */
+			}
+
+			/**
+			 * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+			 * `font-size` values of the `input`, it causes the cursor style of the
+			 * decrement button to change from `default` to `text`.
+			 */
+
+			input[type="number"]::-webkit-inner-spin-button,
+			input[type="number"]::-webkit-outer-spin-button {
+			  height: auto;
+			}
+
+			/**
+			 * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+			 * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+			 *    (include `-moz` to future-proof).
+			 */
+
+			input[type="search"] {
+			  -webkit-appearance: textfield; /* 1 */
+			  -moz-box-sizing: content-box;
+			  -webkit-box-sizing: content-box; /* 2 */
+			  box-sizing: content-box;
+			}
+
+			/**
+			 * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+			 * Safari (but not Chrome) clips the cancel button when the search input has
+			 * padding (and `textfield` appearance).
+			 */
+
+			input[type="search"]::-webkit-search-cancel-button,
+			input[type="search"]::-webkit-search-decoration {
+			  -webkit-appearance: none;
+			}
+
+			/**
+			 * Define consistent border, margin, and padding.
+			 */
+
+			fieldset {
+			  border: 1px solid #c0c0c0;
+			  margin: 0 2px;
+			  padding: 0.35em 0.625em 0.75em;
+			}
+
+			/**
+			 * 1. Correct `color` not being inherited in IE 8/9/10/11.
+			 * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+			 */
+
+			legend {
+			  border: 0; /* 1 */
+			  padding: 0; /* 2 */
+			}
+
+			/**
+			 * Remove default vertical scrollbar in IE 8/9/10/11.
+			 */
+
+			textarea {
+			  overflow: auto;
+			}
+
+			/**
+			 * Don't inherit the `font-weight` (applied by a rule above).
+			 * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+			 */
+
+			optgroup {
+			  font-weight: bold;
+			}
+
+			/* Tables
+			   ========================================================================== */
+
+			/**
+			 * Remove most spacing between table cells.
+			 */
+
+			table {
+			  border-collapse: collapse;
+			  border-spacing: 0;
+			}
+
+			td,
+			th {
+			  padding: 0;
+			}
+
+			/*custom styles*/
+
 	        body {
-	            background: #2550DF;
-	            color: #AACCFF;
-	            font-family: Helvetica, 'Roboto', Arial, sans-serif;
+	        	background-color: #eceff1;
+	            color: #263238;
+	            font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+	            font-size: 16px;
 	        }
 
-	        header,
-	        section,
-	        footer {
-	        	max-width: 950px;
+	        * {
+	        	box-sizing: border-box;
+	        }
+
+	        p {
+	        	font-size: 1.25em;
+	        	line-height: 1.2em;
+	        }
+
+	        .container {
 	        	margin: 0 auto;
+	        	max-width: 950px;
 	        	padding: 30px;
+	        	width: 100%;
 	        }
 
-	        section p {
-	        	text-shadow: 0 0 4px #0022AA;
+	        header {
+	        	background-color: #2196f3;
+	        }
+
+	        .hero {
+	        	background-color: #263238;
+	        }
+
+	        .hero p,
+	        header p {
+	        	color: #ffffff;
+	        	font-weight: 300;
 	        }
 
 	        h1 {
-	        	border-color: #5FA0EF;
-	        	border-style: solid;
-	        	border-width: 0 0 4px;
 	        	color: #FFFFFF;
-	        	line-height: 1.5em;
+	        	font-family: 'Roboto Condensed', Helvetica, sans-serif;
+	        	font-weight: 300;
+	        	line-height: 2em;
 	        }
 
 	        a {
@@ -42,55 +493,65 @@
 	        }
 
 	        #progress-element {
-	        	background: #FFFFFF;
-	        	box-shadow: 1px 1px 5px #5FA0EF;
+	        	background-color: #2196f3;
+	        	box-shadow: 1px 1px 5px #1976d2;
 	        	height: 12px;
 	        }
 	    </style>
 </head>
 <body>
 	<header>
-		<h1>scrollProgress showroom</h1>
-	</header>
-	<section class="main">
-		<div class="gap">
+		<div class="container">
+			<h1>scroll<strong>Progress</strong></h1>
 			<p>Small library that creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post.</p>
+		</div>
+	</header>
+	<section class="hero">
+		<div class="container">
 			<p>Scroll down and you'll see a progress bar on the bottom that will increase its width until you get to the end of the page.</p>
 			<p>
-				You can fork this project, download it and use it going to the <a href="https://github.com/jeremenichelli/scrollProgress">github&nbsp;repository</a>.
+				You can download the and use it going to the <a href="https://github.com/jeremenichelli/scrollProgress">github&nbsp;repository</a> or download it from <strong>bower</strong> and <strong>npm</strong> as <strong>scrollprogress</strong>.
 			</p>
 			<p>
-			<strong>Support:</strong> Chrome, Firefox, Safari, IE9+</p>
+			<strong>Support:</strong> Chrome, Firefox, Safari and IE9+</p>
 		</div>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci. Integer tristique, tortor dapibus facilisis tincidunt, ante elit semper libero, in tincidunt arcu urna quis sem. In blandit urna metus, id pretium ipsum tincidunt non.
-		<p>Curabitur id tempor enim, nec lobortis justo. Curabitur erat augue, aliquet vel hendrerit id, pellentesque eu sapien. Sed auctor dictum sem sit amet dictum. Proin id lacus at nibh vestibulum tristique. Curabitur non blandit dolor, vitae sodales justo.</p>
-		<p>Suspendisse et vestibulum elit, eu porttitor ante. Phasellus vel sapien dui. Morbi interdum lacus vel arcu cursus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vitae tellus eu orci elementum imperdiet at nec nisi. Pellentesque hendrerit, tortor vel tempor dignissim, est nisi molestie nibh, a semper risus nunc quis felis.</p>
-		<p>Nullam tempor tincidunt enim id dictum. Etiam dictum dui id purus placerat feugiat. Phasellus consequat ante massa. Ut odio sem, condimentum eget erat quis, volutpat convallis libero. Donec id pulvinar magna. Donec id enim mi. Nam lobortis lorem est, ac mollis urna euismod sed. Cras dignissim ut tortor vel posuere.</p>
-		<p>Sed lacinia felis vitae consectetur rutrum. Sed velit ligula, vehicula at consectetur eget, tempor eget tellus. Nulla molestie nisl non nunc euismod, tincidunt mattis massa suscipit. Nulla facilisi.</p>
-		<p> Pellentesque sem metus, ultrices ac lobortis ac, sodales ut eros. Nam tincidunt turpis sit amet congue scelerisque. Nunc elementum gravida ipsum, id placerat turpis pulvinar ut. Aliquam cursus felis et sagittis suscipit. Nam porta ligula est, vel varius nisi consectetur vel. Nam congue augue metus, sit amet blandit est hendrerit adipiscing. Nam sagittis dignissim urna. Nullam at rhoncus arcu. Nulla varius, dui placerat ullamcorper commodo, risus nibh fringilla dui, sit amet dignissim odio lectus et urna. Duis faucibus felis consectetur massa dictum ultricies. Maecenas eget porta mi, non dapibus dolor.</p>
-		<p>Donec a nisl consequat, sodales purus ut, hendrerit mauris. Fusce metus velit, dignissim adipiscing nisi non, viverra accumsan leo. Curabitur ultrices, magna id tempus viverra, felis ligula aliquam risus, eu rhoncus massa enim sit amet mi. Vestibulum faucibus volutpat euismod. Nulla facilisi. Vivamus ut euismod libero. Cras iaculis magna a faucibus lobortis. Nulla et est sed ante lacinia vestibulum at at diam. Aenean id urna molestie, egestas lectus ut, viverra risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam felis nulla, laoreet in volutpat sed, sodales nec nulla. Nunc quis arcu hendrerit arcu lobortis tempus quis nec libero. Etiam congue nulla vitae fermentum cursus. Sed ac ornare nisi.</p>
-		<p>Praesent congue iaculis orci, vitae tempus orci accumsan ac. Nunc id nulla massa. Aliquam tincidunt quis mi et varius. Donec sagittis, orci id posuere porttitor, turpis arcu pulvinar odio, ac euismod tellus urna a massa. Fusce at enim risus. Nullam volutpat elementum nulla, sit amet fermentum neque iaculis eget. Maecenas ac nisi vulputate, pulvinar odio imperdiet, scelerisque sapien. Aenean non mi at turpis aliquam commodo sit amet et lectus. </p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci. Integer tristique, tortor dapibus facilisis tincidunt, ante elit semper libero, in tincidunt arcu urna quis sem. In blandit urna metus, id pretium ipsum tincidunt non.
-		<p>Curabitur id tempor enim, nec lobortis justo. Curabitur erat augue, aliquet vel hendrerit id, pellentesque eu sapien. Sed auctor dictum sem sit amet dictum. Proin id lacus at nibh vestibulum tristique. Curabitur non blandit dolor, vitae sodales justo.</p>
-		<p>Suspendisse et vestibulum elit, eu porttitor ante. Phasellus vel sapien dui. Morbi interdum lacus vel arcu cursus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vitae tellus eu orci elementum imperdiet at nec nisi. Pellentesque hendrerit, tortor vel tempor dignissim, est nisi molestie nibh, a semper risus nunc quis felis.</p>
-		<p>Nullam tempor tincidunt enim id dictum. Etiam dictum dui id purus placerat feugiat. Phasellus consequat ante massa. Ut odio sem, condimentum eget erat quis, volutpat convallis libero. Donec id pulvinar magna. Donec id enim mi. Nam lobortis lorem est, ac mollis urna euismod sed. Cras dignissim ut tortor vel posuere.</p>
-		<p>Sed lacinia felis vitae consectetur rutrum. Sed velit ligula, vehicula at consectetur eget, tempor eget tellus. Nulla molestie nisl non nunc euismod, tincidunt mattis massa suscipit. Nulla facilisi.</p>
-		<p> Pellentesque sem metus, ultrices ac lobortis ac, sodales ut eros. Nam tincidunt turpis sit amet congue scelerisque. Nunc elementum gravida ipsum, id placerat turpis pulvinar ut. Aliquam cursus felis et sagittis suscipit. Nam porta ligula est, vel varius nisi consectetur vel. Nam congue augue metus, sit amet blandit est hendrerit adipiscing. Nam sagittis dignissim urna. Nullam at rhoncus arcu. Nulla varius, dui placerat ullamcorper commodo, risus nibh fringilla dui, sit amet dignissim odio lectus et urna. Duis faucibus felis consectetur massa dictum ultricies. Maecenas eget porta mi, non dapibus dolor.</p>
-		<p>Donec a nisl consequat, sodales purus ut, hendrerit mauris. Fusce metus velit, dignissim adipiscing nisi non, viverra accumsan leo. Curabitur ultrices, magna id tempus viverra, felis ligula aliquam risus, eu rhoncus massa enim sit amet mi. Vestibulum faucibus volutpat euismod. Nulla facilisi. Vivamus ut euismod libero. Cras iaculis magna a faucibus lobortis. Nulla et est sed ante lacinia vestibulum at at diam. Aenean id urna molestie, egestas lectus ut, viverra risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam felis nulla, laoreet in volutpat sed, sodales nec nulla. Nunc quis arcu hendrerit arcu lobortis tempus quis nec libero. Etiam congue nulla vitae fermentum cursus. Sed ac ornare nisi.</p>
-		<p>Praesent congue iaculis orci, vitae tempus orci accumsan ac. Nunc id nulla massa. Aliquam tincidunt quis mi et varius. Donec sagittis, orci id posuere porttitor, turpis arcu pulvinar odio, ac euismod tellus urna a massa. Fusce at enim risus. Nullam volutpat elementum nulla, sit amet fermentum neque iaculis eget. Maecenas ac nisi vulputate, pulvinar odio imperdiet, scelerisque sapien. Aenean non mi at turpis aliquam commodo sit amet et lectus. </p>
+	</section>
+	<section class="main">
+		<div class="container">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci. Integer tristique, tortor dapibus facilisis tincidunt, ante elit semper libero, in tincidunt arcu urna quis sem. In blandit urna metus, id pretium ipsum tincidunt non.
+			<p>Curabitur id tempor enim, nec lobortis justo. Curabitur erat augue, aliquet vel hendrerit id, pellentesque eu sapien. Sed auctor dictum sem sit amet dictum. Proin id lacus at nibh vestibulum tristique. Curabitur non blandit dolor, vitae sodales justo.</p>
+			<p>Suspendisse et vestibulum elit, eu porttitor ante. Phasellus vel sapien dui. Morbi interdum lacus vel arcu cursus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vitae tellus eu orci elementum imperdiet at nec nisi. Pellentesque hendrerit, tortor vel tempor dignissim, est nisi molestie nibh, a semper risus nunc quis felis.</p>
+			<p>Nullam tempor tincidunt enim id dictum. Etiam dictum dui id purus placerat feugiat. Phasellus consequat ante massa. Ut odio sem, condimentum eget erat quis, volutpat convallis libero. Donec id pulvinar magna. Donec id enim mi. Nam lobortis lorem est, ac mollis urna euismod sed. Cras dignissim ut tortor vel posuere.</p>
+			<p>Sed lacinia felis vitae consectetur rutrum. Sed velit ligula, vehicula at consectetur eget, tempor eget tellus. Nulla molestie nisl non nunc euismod, tincidunt mattis massa suscipit. Nulla facilisi.</p>
+			<p> Pellentesque sem metus, ultrices ac lobortis ac, sodales ut eros. Nam tincidunt turpis sit amet congue scelerisque. Nunc elementum gravida ipsum, id placerat turpis pulvinar ut. Aliquam cursus felis et sagittis suscipit. Nam porta ligula est, vel varius nisi consectetur vel. Nam congue augue metus, sit amet blandit est hendrerit adipiscing. Nam sagittis dignissim urna. Nullam at rhoncus arcu. Nulla varius, dui placerat ullamcorper commodo, risus nibh fringilla dui, sit amet dignissim odio lectus et urna. Duis faucibus felis consectetur massa dictum ultricies. Maecenas eget porta mi, non dapibus dolor.</p>
+			<p>Donec a nisl consequat, sodales purus ut, hendrerit mauris. Fusce metus velit, dignissim adipiscing nisi non, viverra accumsan leo. Curabitur ultrices, magna id tempus viverra, felis ligula aliquam risus, eu rhoncus massa enim sit amet mi. Vestibulum faucibus volutpat euismod. Nulla facilisi. Vivamus ut euismod libero. Cras iaculis magna a faucibus lobortis. Nulla et est sed ante lacinia vestibulum at at diam. Aenean id urna molestie, egestas lectus ut, viverra risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam felis nulla, laoreet in volutpat sed, sodales nec nulla. Nunc quis arcu hendrerit arcu lobortis tempus quis nec libero. Etiam congue nulla vitae fermentum cursus. Sed ac ornare nisi.</p>
+			<p>Praesent congue iaculis orci, vitae tempus orci accumsan ac. Nunc id nulla massa. Aliquam tincidunt quis mi et varius. Donec sagittis, orci id posuere porttitor, turpis arcu pulvinar odio, ac euismod tellus urna a massa. Fusce at enim risus. Nullam volutpat elementum nulla, sit amet fermentum neque iaculis eget. Maecenas ac nisi vulputate, pulvinar odio imperdiet, scelerisque sapien. Aenean non mi at turpis aliquam commodo sit amet et lectus. </p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci. Integer tristique, tortor dapibus facilisis tincidunt, ante elit semper libero, in tincidunt arcu urna quis sem. In blandit urna metus, id pretium ipsum tincidunt non.
+			<p>Curabitur id tempor enim, nec lobortis justo. Curabitur erat augue, aliquet vel hendrerit id, pellentesque eu sapien. Sed auctor dictum sem sit amet dictum. Proin id lacus at nibh vestibulum tristique. Curabitur non blandit dolor, vitae sodales justo.</p>
+			<p>Suspendisse et vestibulum elit, eu porttitor ante. Phasellus vel sapien dui. Morbi interdum lacus vel arcu cursus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vitae tellus eu orci elementum imperdiet at nec nisi. Pellentesque hendrerit, tortor vel tempor dignissim, est nisi molestie nibh, a semper risus nunc quis felis.</p>
+			<p>Nullam tempor tincidunt enim id dictum. Etiam dictum dui id purus placerat feugiat. Phasellus consequat ante massa. Ut odio sem, condimentum eget erat quis, volutpat convallis libero. Donec id pulvinar magna. Donec id enim mi. Nam lobortis lorem est, ac mollis urna euismod sed. Cras dignissim ut tortor vel posuere.</p>
+			<p>Sed lacinia felis vitae consectetur rutrum. Sed velit ligula, vehicula at consectetur eget, tempor eget tellus. Nulla molestie nisl non nunc euismod, tincidunt mattis massa suscipit. Nulla facilisi.</p>
+			<p> Pellentesque sem metus, ultrices ac lobortis ac, sodales ut eros. Nam tincidunt turpis sit amet congue scelerisque. Nunc elementum gravida ipsum, id placerat turpis pulvinar ut. Aliquam cursus felis et sagittis suscipit. Nam porta ligula est, vel varius nisi consectetur vel. Nam congue augue metus, sit amet blandit est hendrerit adipiscing. Nam sagittis dignissim urna. Nullam at rhoncus arcu. Nulla varius, dui placerat ullamcorper commodo, risus nibh fringilla dui, sit amet dignissim odio lectus et urna. Duis faucibus felis consectetur massa dictum ultricies. Maecenas eget porta mi, non dapibus dolor.</p>
+			<p>Donec a nisl consequat, sodales purus ut, hendrerit mauris. Fusce metus velit, dignissim adipiscing nisi non, viverra accumsan leo. Curabitur ultrices, magna id tempus viverra, felis ligula aliquam risus, eu rhoncus massa enim sit amet mi. Vestibulum faucibus volutpat euismod. Nulla facilisi. Vivamus ut euismod libero. Cras iaculis magna a faucibus lobortis. Nulla et est sed ante lacinia vestibulum at at diam. Aenean id urna molestie, egestas lectus ut, viverra risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam felis nulla, laoreet in volutpat sed, sodales nec nulla. Nunc quis arcu hendrerit arcu lobortis tempus quis nec libero. Etiam congue nulla vitae fermentum cursus. Sed ac ornare nisi.</p>
+			<p>Praesent congue iaculis orci, vitae tempus orci accumsan ac. Nunc id nulla massa. Aliquam tincidunt quis mi et varius. Donec sagittis, orci id posuere porttitor, turpis arcu pulvinar odio, ac euismod tellus urna a massa. Fusce at enim risus. Nullam volutpat elementum nulla, sit amet fermentum neque iaculis eget. Maecenas ac nisi vulputate, pulvinar odio imperdiet, scelerisque sapien. Aenean non mi at turpis aliquam commodo sit amet et lectus. </p>
+		</div>
 	</section>
 	<footer>
-		2014 &copy; Jeremias Menichelli - MIT License
+		<div class="container">
+			2014 &copy; Jeremias Menichelli - MIT License
+		</div>
 	</footer>
 	<script src="dist/scrollProgress.js"></script>
 	<script>
-		scrollProgress.set({
-				styles: false,
-				events: false,
-				bottom: true
-			});
-		window.onresize = scrollProgress.update;
-		window.onscroll = scrollProgress.trigger;
+		window.onload = function() {
+			scrollProgress.set({
+					styles: false,
+					events: false,
+					bottom: true
+				});
+			window.onresize = scrollProgress.update;
+			window.onscroll = scrollProgress.trigger;
+		};
 	</script>
 </body>
 </html>

@@ -25,7 +25,7 @@
         endPoint,
         // default configuration object
         config = {
-            bottom: false,
+            bottom: true,
             color: '#000000',
             height: '5px',
             styles: true,
@@ -96,7 +96,7 @@
             // settings is true
             if (config.events) {
                 window.onscroll = _setProgress;
-                window.onresize = _updateMetrics.bind(null);
+                window.onresize = _updateMetrics.bind;
             }
 
             isSet = true;
@@ -107,7 +107,7 @@
 
     var _setProgress = function() {
         try {
-            var y = window.scrollY || window.pageYOffset;
+            var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
             progress = (y / endPoint) * 100;
             progressElement.style.width = progress + '%';
         } catch (e) {
