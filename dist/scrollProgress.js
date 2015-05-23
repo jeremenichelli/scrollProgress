@@ -33,6 +33,10 @@
             events: true
         };
 
+    /*
+     * Create DOM elements which graphically represent the progress
+     * @method
+     */
     var _createElements = function() {
         progressWrapper = document.createElement('div');
         progressElement = document.createElement('div');
@@ -44,6 +48,11 @@
         body.appendChild(progressWrapper);
     };
 
+    /*
+     * Replaces configuration values with custom ones
+     * @method
+     * @param {object} obj - object containing custom options
+     */
     var _setConfigObject = function(obj) {
         // override with custom attributes
         if (typeof obj === 'object') {
@@ -55,6 +64,10 @@
         }
     };
 
+    /*
+     * Set styles on DOM elements
+     * @method
+     */
     var _setElementsStyles = function() {
         // setting progress to zero and wrapper to full width
         progressElement.style.width = '0';
@@ -80,6 +93,11 @@
         }
     };
 
+    /*
+     * Main function which sets all variables and bind events if needed
+     * @method
+     * @param {object} custom - object containing custom options
+     */
     var _set = function(custom) {
         // set only once
         if (!isSet) {
@@ -105,6 +123,10 @@
         }
     };
 
+    /*
+     * Calculates how much user has scrolled
+     * @method
+     */
     var _setProgress = function() {
         try {
             var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
@@ -115,11 +137,19 @@
         }
     };
 
+    /*
+     * Updates the document's height and adjusts the progress bar
+     * @method
+     */
     var _setMetrics = function() {
         endPoint = _getEndPoint();
         _setProgress();
     };
 
+    /*
+     * Returns how much the user can scroll in the document
+     * @method
+     */
     var _getEndPoint = function() {
         return body.scrollHeight - window.innerHeight || document.documentElement.clientHeight;
     };

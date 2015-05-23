@@ -461,7 +461,7 @@
 	        	width: 100%;
 	        }
 
-	        header {
+	        #header {
 	        	background-color: #2196f3;
 	        }
 
@@ -470,7 +470,7 @@
 	        }
 
 	        .hero p,
-	        header p {
+	        #header p {
 	        	color: #ffffff;
 	        	font-weight: 300;
 	        }
@@ -479,7 +479,18 @@
 	        	color: #FFFFFF;
 	        	font-family: 'Roboto Condensed', Helvetica, sans-serif;
 	        	font-weight: 300;
-	        	line-height: 2em;
+	        	font-size: 3em;
+	        	line-height: 1.25em;
+	        	margin: 0;
+	        }
+
+	        p.author {
+	        	text-transform: uppercase;
+	        	margin: 0;
+	        }
+
+	        #footer p {
+	        	font-size: 1em;
 	        }
 
 	        a {
@@ -500,23 +511,24 @@
 	    </style>
 </head>
 <body>
-	<header>
+	<div id="header">
 		<div class="container">
 			<h1>scroll<strong>Progress</strong></h1>
+			<p class="author">by Jeremias Menichelli</p>
 			<p>Small library that creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post.</p>
 		</div>
-	</header>
-	<section class="hero">
+	</div>
+	<div class="hero">
 		<div class="container">
-			<p>Scroll down and you'll see a progress bar on the bottom that will increase its width until you get to the end of the page.</p>
+			<p>Scroll down and see how it works!</p>
 			<p>
 				You can download the code from the <a href="https://github.com/jeremenichelli/scrollProgress">github&nbsp;repository</a> or download it from <strong>bower</strong> and <strong>npm</strong> as <strong>scrollprogress</strong>.
 			</p>
 			<p>
-			<strong>Support:</strong> Chrome, Firefox, Safari and IE9+</p>
+			<strong>Support:</strong> Chrome, Firefox, Safari and IE8+</p>
 		</div>
-	</section>
-	<section class="main">
+	</div>
+	<div class="main">
 		<div class="container">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur blandit tortor sit amet libero suscipit tristique. Sed eu sagittis orci. Integer tristique, tortor dapibus facilisis tincidunt, ante elit semper libero, in tincidunt arcu urna quis sem. In blandit urna metus, id pretium ipsum tincidunt non.
 			<p>Curabitur id tempor enim, nec lobortis justo. Curabitur erat augue, aliquet vel hendrerit id, pellentesque eu sapien. Sed auctor dictum sem sit amet dictum. Proin id lacus at nibh vestibulum tristique. Curabitur non blandit dolor, vitae sodales justo.</p>
@@ -535,12 +547,14 @@
 			<p>Donec a nisl consequat, sodales purus ut, hendrerit mauris. Fusce metus velit, dignissim adipiscing nisi non, viverra accumsan leo. Curabitur ultrices, magna id tempus viverra, felis ligula aliquam risus, eu rhoncus massa enim sit amet mi. Vestibulum faucibus volutpat euismod. Nulla facilisi. Vivamus ut euismod libero. Cras iaculis magna a faucibus lobortis. Nulla et est sed ante lacinia vestibulum at at diam. Aenean id urna molestie, egestas lectus ut, viverra risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam felis nulla, laoreet in volutpat sed, sodales nec nulla. Nunc quis arcu hendrerit arcu lobortis tempus quis nec libero. Etiam congue nulla vitae fermentum cursus. Sed ac ornare nisi.</p>
 			<p>Praesent congue iaculis orci, vitae tempus orci accumsan ac. Nunc id nulla massa. Aliquam tincidunt quis mi et varius. Donec sagittis, orci id posuere porttitor, turpis arcu pulvinar odio, ac euismod tellus urna a massa. Fusce at enim risus. Nullam volutpat elementum nulla, sit amet fermentum neque iaculis eget. Maecenas ac nisi vulputate, pulvinar odio imperdiet, scelerisque sapien. Aenean non mi at turpis aliquam commodo sit amet et lectus. </p>
 		</div>
-	</section>
-	<footer>
+	</div>
+	<div id="footer">
 		<div class="container">
-			2014 &copy; Jeremias Menichelli - MIT License
+			<p>
+				2014 &copy; Jeremias Menichelli - MIT License
+			</p>
 		</div>
-	</footer>
+	</div>
 	<script src="dist/scrollProgress.js"></script>
 	<script>
 		window.onload = function() {
