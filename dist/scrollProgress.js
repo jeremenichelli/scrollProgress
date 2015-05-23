@@ -1,5 +1,5 @@
 /*
- * scrollProgress - v2.1.0
+ * scrollProgress - v2.1.1
  * https://github.com/jeremenichelli/scrollProgress
  * 2014 (c) Jeremias Menichelli - MIT License
 */
