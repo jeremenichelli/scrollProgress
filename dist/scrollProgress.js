@@ -1,5 +1,5 @@
 /*
- * scrollProgress - v2.0.0
+ * scrollProgress - v2.0.1
  * https://github.com/jeremenichelli/scrollProgress
  * 2014 (c) Jeremias Menichelli - MIT License
 */
@@ -90,13 +90,13 @@
             _setElementsStyles();
 
             // set initial metrics
-            _updateMetrics();
+            _setMetrics();
 
             // bind events only if
             // settings is true
             if (config.events) {
                 window.onscroll = _setProgress;
-                window.onresize = _updateMetrics.bind;
+                window.onresize = _setMetrics;
             }
 
             isSet = true;
@@ -115,19 +115,18 @@
         }
     };
 
-    var _updateMetrics = function() {
+    var _setMetrics = function() {
         endPoint = _getEndPoint();
         _setProgress();
     };
 
     var _getEndPoint = function() {
-        var end = body.scrollHeight - window.innerHeight;
-        return end;
+        return body.scrollHeight - window.innerHeight || document.documentElement.clientHeight;
     };
 
     return {
         set: _set,
         trigger: _setProgress,
-        update: _updateMetrics
+        update: _setMetrics
     };
 });
