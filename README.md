@@ -7,7 +7,7 @@ Small library that creates a progress bar that indicates how much you've scrolle
 After you included the script in your project or just added a script tag with the file
 
 ```html
-<script src="js/scrollProgress.js"></script>
+<script src="js/scrollProgress.min.js"></script>
 ```
 
 also available on **bower**
