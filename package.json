@@ -5,7 +5,7 @@
   "url": "https://github.com/jeremenichelli/scrollProgress",
   "author": "Jeremias Menichelli",
   "copyright": "2014",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "license": "MIT",
   "main": "./dist/scrollProgress.js",
   "repository": {
