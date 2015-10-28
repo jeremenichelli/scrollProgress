@@ -1,4 +1,6 @@
 (function(root, factory) {
+    'use strict';
+
     if (typeof define === 'function' && define.amd) {
         define(function() {
             return factory(root);
@@ -29,7 +31,7 @@
 
     /*
      * Create DOM elements which graphically represent the progress
-     * @method
+     * @method _createElements
      */
     var _createElements = function() {
         progressWrapper = document.createElement('div');
@@ -44,7 +46,7 @@
 
     /*
      * Replaces configuration values with custom ones
-     * @method
+     * @method _setConfigObject
      * @param {object} obj - object containing custom options
      */
     var _setConfigObject = function(obj) {
@@ -60,7 +62,7 @@
 
     /*
      * Set styles on DOM elements
-     * @method
+     * @method _setElementsStyles
      */
     var _setElementsStyles = function() {
         // setting progress to zero and wrapper to full width
@@ -89,7 +91,7 @@
 
     /*
      * Main function which sets all variables and bind events if needed
-     * @method
+     * @method _set
      * @param {object} custom - object containing custom options
      */
     var _set = function(custom) {
@@ -113,18 +115,18 @@
 
             isSet = true;
         } else {
-            console.error('scrollProgress has already been set!');
+            throw new Error('scrollProgress has already been set!');
         }
     };
 
     /*
      * Calculates how much user has scrolled
-     * @method
+     * @method _setProgress
      */
     var _setProgress = function() {
         try {
             var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            progress = (y / endPoint) * 100;
+            progress = y / endPoint * 100;
             progressElement.style.width = progress + '%';
         } catch (e) {
             console.error(e);
@@ -133,7 +135,7 @@
 
     /*
      * Updates the document's height and adjusts the progress bar
-     * @method
+     * @method _setMetrics
      */
     var _setMetrics = function() {
         endPoint = _getEndPoint();
@@ -142,10 +144,10 @@
 
     /*
      * Returns how much the user can scroll in the document
-     * @method
+     * @method _getEndPoint
      */
     var _getEndPoint = function() {
-        return body.scrollHeight - window.innerHeight || document.documentElement.clientHeight;
+        return body.scrollHeight - (window.innerHeight || document.documentElement.clientHeight);
     };
 
     return {

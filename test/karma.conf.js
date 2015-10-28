@@ -1,14 +1,9 @@
-module.exports = function (config) {
+// karma.conf.js
+module.exports = function(config) {
     config.set({
-        basePath : '',
-        autoWatch : true,
+        files: [ '../src/scrollProgress.js', '../test/scrollProgress.spec.js' ],
+        browsers: [ 'PhantomJS' ],
         frameworks: [ 'jasmine' ],
-        browsers : [ 'PhantomJS' ],
-        plugins : [
-            'karma-spec-reporter',
-            'karma-phantomjs-launcher',
-            'karma-jasmine'
-        ],
-        reporters : [ 'spec' ]
+        reporters: [ 'spec' ]
     });
 };
