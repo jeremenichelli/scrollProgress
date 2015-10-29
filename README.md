@@ -52,7 +52,7 @@ The only thing that the script will control will be the width of the progress ba
 
 ### Events inside the script
 
-To be able to work, **scrollProgress** adds events when the window scrolls and when it gets resized to update some emtrics and keep it consistent. There's a chance that you're using these events in your page for other purposes.
+To be able to work, **scrollProgress** adds events when the window scrolls and when it gets resized to update some metrics and keep it consistent. There's a chance that you're using these events in your page for other purposes.
 
 To prevent overrides in these events you can pass a flag called ```events``` with a ```false``` value. Then you have to call ```scrollProgress.trigger()``` on scroll and ```scrollProgress.update()```on resize to make sure the code works as expected.
 

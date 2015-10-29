@@ -2,7 +2,7 @@
     'use strict';
 
     /*
-     * aliasses
+     * aliases
      * gulp: gulp streaming build system
      * $: namespace for gulp plugins
      */
