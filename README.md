@@ -4,7 +4,7 @@ Light weight library to observe the viewport scroll position.
 
 In previous versions this package injected a scroll bar showing the scrolling progress. **Why did I change it?** Because it wasn't flexible to be adapted to others uses or UI libraries.
 
-**This means you still can do a progress bar as before** and with even less code as before, keep scrolling and take a look at the recipes below.
+**This means you still can create a progress bar as before** and even with less code, keep scrolling to the **Recipes** section to see how.
 
 
 ## Add it to your project
@@ -39,13 +39,13 @@ Whenever you want the observer to stop working just call `progressObserver.destr
 
 To accomplish the old functionality you will need to add the DOM element and the styles, something that the old version did for you, and then create an observer to update the bar width.
 
-#### html
+#### HTML
 
 ```html
 <div class="progress-bar"></div>
 ```
 
-#### css
+#### CSS
 
 ```css
 .progress-bar {
@@ -57,7 +57,7 @@ To accomplish the old functionality you will need to add the DOM element and the
 }
 ```
 
-#### js
+#### JS
 
 ```js
 const progressElement = document.querySelector('.progress-bar');
@@ -78,7 +78,7 @@ scrollProgress.set({ styles: false });
 The only thing that the script will control will be the width of the progress bar as you scroll, the rest of the styling is all on you. _Remember that the script won't put any styles at all so make sure to position the bar as fixed in your page or you won't be able to see it._
 
 
-### Write a scroll bar component
+### Scroll bar component
 
 One of the main reasons this library was move to this new approach is because you can easily couple an observer with any component library used nowadays. For example, create a React scroll bar component.
 
@@ -130,7 +130,7 @@ It's easy to imagine how to create the same component for other frameworks. If y
 ```
 The MIT License (MIT)
 
-Copyright (c) 2014 Jeremias Menichelli
+Copyright (c) 2017 Jeremias Menichelli
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
