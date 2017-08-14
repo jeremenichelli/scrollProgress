@@ -80,7 +80,7 @@ The only thing that the script will control will be the width of the progress ba
 
 ### Scroll bar component
 
-One of the main reasons this library was move to this new approach is because you can easily couple an observer with any component library used nowadays. For example, create a React scroll bar component.
+One of the main reasons this library was moved to this new approach is because you can easily couple an observer with any component library used nowadays. For example, create a React scroll bar component.
 
 ```jsx
 import { Component } from 'react';
