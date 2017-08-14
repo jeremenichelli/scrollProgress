@@ -13,9 +13,9 @@
     body {
     	background-color: #eceff1;
       color: #263238;
-      font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 20px;
+      line-height: 1.65;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -26,13 +26,13 @@
     }
 
     p {
-    	font-size: 1.25em;
+    	/*font-size: 1.25em;*/
     }
 
     .container {
     	margin: 0 auto;
-    	max-width: 950px;
-    	padding: 30px;
+    	max-width: 800px;
+    	padding: 20px;
     	width: 100%;
     }
 
@@ -46,12 +46,11 @@
 
     .hero p,
     #header p {
-    	color: #ffffff;
+    	color: #fff;
     }
 
     h1 {
-    	color: #FFFFFF;
-    	font-family: 'Roboto Condensed', Helvetica, sans-serif;
+    	color: #fff;
     	font-size: 2.5em;
       font-weight: 400;
     	margin: 0;
@@ -63,7 +62,7 @@
     }
 
     a {
-    	color: #FFFFFF;
+    	color: #fff;
     }
 
     .progress-bar {
@@ -87,9 +86,9 @@
 		<div class="container">
 			<p>Scroll down and see how it works or <a href="https://github.com/jeremenichelli/scrollProgress#scrollprogress-">take a look at the official documentation</a>.</p>
 			<p>
-				You can download the code from the <a href="https://github.com/jeremenichelli/scrollProgress">github&nbsp;repository</a> or download it from <strong>bower</strong> and <strong>npm</strong> as <strong>scrollprogress</strong>.
+				Download the code from the <a href="https://github.com/jeremenichelli/scrollProgress">repository</a> or download it from <strong>bower</strong> and <strong>npm</strong> as&nbsp;<strong>scrollprogress</strong>.
 			</p>
-			<p><strong>Support:</strong> Chrome, Firefox, Safari and IE9+</p>
+			<p><strong>Support:</strong> Chrome, Firefox, Safari and&nbsp;IE9+</p>
 		</div>
 	</div>
 	<div class="main">
@@ -123,13 +122,16 @@
 	<script src="dist/scrollProgress.js"></script>
 	<script>
 		window.addEventListener('load', function() {
-      var progressBar = document.querySelector('.progress-bar');
 
-      function onProgress(x, y) {
-        progressBar.style.width = y * 100 + '%';
-      }
+      setTimeout(function() {
+        var progressBar = document.querySelector('.progress-bar');
 
-      self.progressObserver = new ScrollProgress(onProgress);
+        function onProgress(x, y) {
+          progressBar.style.width = y * 100 + '%';
+        }
+
+        self.progressObserver = new ScrollProgress(onProgress);
+      }, 100)
     });
 	</script>
 </body>
