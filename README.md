@@ -7,12 +7,12 @@ In previous versions this package injected a scroll bar showing the scrolling pr
 **This means you still can do a progress bar as before** and with even less code as before, keep scrolling and take a look at the recipes below.
 
 
-### Add it to your project
+## Add it to your project
 
 Include the `dist` file in a script tag or run `npm install scrollprogress --save`.
 
 
-### Use it
+## Use
 
 In this last version, you have to create a new instance to create an observer and pass a callback to the contructor. That observer can be destroy at any time.
 
@@ -35,7 +35,7 @@ Whenever you want the observer to stop working just call `progressObserver.destr
 
 ## Recipes
 
-## Vanilla scroll progress bar
+### Vanilla scroll progress bar
 
 To accomplish the old functionality you will need to add the DOM element and the styles, something that the old version did for you, and then create an observer to update the bar width.
 
@@ -90,7 +90,7 @@ export default class ScrollProgress extends Component {
   constructor() {
     this.state = {
       progress: 0;
-    }
+    };
   }
 
   componentDidMount() {
@@ -104,7 +104,7 @@ export default class ScrollProgress extends Component {
   }
 
   render() {
-    const styles = {
+    const style = {
       backgroundColor: 'rebeccapurple',
       height: '5px',
       position: 'fixed',
@@ -116,7 +116,7 @@ export default class ScrollProgress extends Component {
     return (
       <div
         className="progress-bar"
-        style={ styles }
+        style={ style }
       />
     );
   }
