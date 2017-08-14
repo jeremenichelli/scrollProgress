@@ -1,10 +1,9 @@
 node_modules
 .gitignore
 .travis.yml
-.jscsrc
-.jshintrc
+.babelrc
+.eslintrc.json
 src
 test
-gulpfile.js
 bower.json
 index.html

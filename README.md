@@ -1,45 +1,73 @@
 # scrollProgress [![Build Status](https://travis-ci.org/jeremenichelli/scrollProgress.svg)](https://travis-ci.org/jeremenichelli/scrollProgress)
 
-Small library that creates a progress bar that indicates how much you've scrolled on a website. It's very useful to show the reading progress in an article or a blog post.
+Light weight library to observe the viewport scroll position.
 
-### Install
+In previous versions this package injected a scroll bar showing the scrolling progress. **Why did I change it?** Because it wasn't flexible to be adapted to others uses or UI libraries.
 
-After you included the script in your project or just added a script tag with the file
-
-```html
-<script src="js/scrollProgress.min.js"></script>
-```
-
-also available on **bower**
-
-```bash
-bower install scrollprogress --save-dev
-```
-
-... and **npm**
-
-```bash
-npm install scrollprogress --save-dev
-```
+**This means you still can do a progress bar as before** and with even less code as before, keep scrolling and take a look at the recipes below.
 
 
-### Use
+### Add it to your project
 
-To start tracking the scroll progress on your project you just need to call the set method and a progress bar will appear at the bottom of the page as you move inside the page.
+Include the `dist` file in a script tag or run `npm install scrollprogress --save`.
+
+
+### Use it
+
+In this last version, you have to create a new instance to create an observer and pass a callback to the contructor. That observer can be destroy at any time.
 
 ```js
-scrollProgress.set();
-```
+import ScrollProgress from 'scrollprogress';
 
-You probably want to change the appearance of the bar like its height, color or position to match your page style. Well, good news! The **set** method supports this configurable options.
-
-```js
-scrollProgress.set({
-    color: '#FF9900',
-    height: '12px',
-    bottom: false
+const progressObserver = new ScrollProgress((x, y) => {
+  console.log(x, y);
 });
 ```
+
+The callback will get two arguments, the first one being a decimal number for the horizontal scrolling progress and the second one for the vertical scrolling progress.
+
+The method you pass will also get called on resize since the viewport and body metrics might change.
+
+### destroy
+
+Whenever you want the observer to stop working just call `progressObserver.destroy()`.
+
+
+## Recipes
+
+## Vanilla scroll progress bar
+
+To accomplish the old functionality you will need to add the DOM element and the styles, something that the old version did for you, and then create an observer to update the bar width.
+
+#### html
+
+```html
+<div class="progress-bar"></div>
+```
+
+#### css
+
+```css
+.progress-bar {
+  background-color: rebeccapurple;
+  height: 5px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+```
+
+#### js
+
+```js
+const progressElement = document.querySelector('.progress-bar');
+
+const progressObserver = new ScrollProgress((x, y) => {
+  progressElement.style.width = y * 100 + '%';
+});
+```
+
+And that's it! Super simple.
 
 What if you don't like inline styles and you want to handle the look of it in your CSS style sheet, then you just need to pass a **styles** flag and set it to ```false```.
 
@@ -50,47 +78,75 @@ scrollProgress.set({ styles: false });
 The only thing that the script will control will be the width of the progress bar as you scroll, the rest of the styling is all on you. _Remember that the script won't put any styles at all so make sure to position the bar as fixed in your page or you won't be able to see it._
 
 
-### Events inside the script
+### Write a scroll bar component
 
-To be able to work, **scrollProgress** adds events when the window scrolls and when it gets resized to update some metrics and keep it consistent. There's a chance that you're using these events in your page for other purposes.
+One of the main reasons this library was move to this new approach is because you can easily couple an observer with any component library used nowadays. For example, create a React scroll bar component.
 
-To prevent overrides in these events you can pass a flag called ```events``` with a ```false``` value. Then you have to call ```scrollProgress.trigger()``` on scroll and ```scrollProgress.update()```on resize to make sure the code works as expected.
+```jsx
+import { Component } from 'react';
+import ScrollProgress from 'scrollprogress';
 
-```js
-scrollProgress.set({ events: false });
+export default class ScrollProgress extends Component {
+  constructor() {
+    this.state = {
+      progress: 0;
+    }
+  }
 
-window.onscroll = function() {
-    // some stuff you need to do on scroll
-    scrollProgress.trigger();  
-};
+  componentDidMount() {
+    this.progressObserver = new ScrollProgress((x, y) => {
+      this.setState({ progress: y });
+    });
+  }
 
-window.onresize = function() {
-    // some stuff you need to do on resize
-    scrollProgress.update();  
-};
+  componentWillUnmount() {
+    this.progressObserver.destroy();
+  }
+
+  render() {
+    const styles = {
+      backgroundColor: 'rebeccapurple',
+      height: '5px',
+      position: 'fixed',
+      top: 0,
+      bottom: 0,
+      width: this.state.progress
+    };
+
+    return (
+      <div
+        className="progress-bar"
+        style={ styles }
+      />
+    );
+  }
+}
 ```
 
-### Elements in your page
+It's easy to imagine how to create the same component for other frameworks. If you want to add a recipe or any other use case to the documentation clone this repo and make a pull request.
 
-The script appends two elements with the ids **progress-wrapper** and **progress-element**, but you can change these names by adding a ```prefix``` property to the configuration object.
+## License
 
-```js
-scrollProgress.set({ prefix: 'my-awesome-page-progress-bar' });
 ```
+The MIT License (MIT)
 
-Now these will be the elements added to your page.
+Copyright (c) 2014 Jeremias Menichelli
 
-```html
-<div id="my-awesomepage-progress-bar-wrapper">
-    <div id="my-awesomepage-progress-bar-element"></div>
-</div>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
-
-### Size
-
-This script weights 4.25KB, 1.09KB uncompressed and only 588 bytes uncompreseed and gzipped.
-
-### Contribute
-
-Feel free to rise an issue or suggest a change that you think that can improve this code.
-

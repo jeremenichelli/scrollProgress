@@ -1,158 +1,116 @@
-(function(root, factory) {
-    'use strict';
+/**
+ * Fallback noop function
+ * @method noop
+ * @returns {undefined}
+ */
+function noop() {}
 
-    if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return factory(root);
-        });
-    } else if (typeof exports === 'object') {
-        module.exports = factory;
-    } else {
-        root.scrollProgress = factory(root);
-    }
-})(this, function() {
-    'use strict';
+/**
+ * ScrollProgress class constructor
+ * @constructor ScrollProgress
+ * @param {Function} handleUpdate method to call on scroll update
+ * @returns {undefined}
+ */
+var ScrollProgress = function(handleUpdate) {
+  // assign function to call on update
+  this._handleUpdate = typeof handleUpdate === 'function'
+    ? handleUpdate
+    : noop;
 
-    var body = document.body,
-        progress = 0,
-        isSet = false,
-        progressWrapper,
-        progressElement,
-        endPoint,
-        // default configuration object
-        config = {
-            bottom: true,
-            color: '#000000',
-            height: '5px',
-            styles: true,
-            prefix: 'progress',
-            events: true
-        };
+  // set initial values
+  this._viewportHeight = this._getViewportHeight();
+  this._viewportWidth = this._getViewportWidth();
 
-    /*
-     * Create DOM elements which graphically represent the progress
-     * @method _createElements
-     */
-    var _createElements = function() {
-        progressWrapper = document.createElement('div');
-        progressElement = document.createElement('div');
+  this._progress = this._getProgress();
 
-        progressWrapper.id = config.prefix + '-wrapper';
-        progressElement.id = config.prefix + '-element';
+  // trigger initial update function
+  this._handleUpdate(0, this._progress);
 
-        progressWrapper.appendChild(progressElement);
-        body.appendChild(progressWrapper);
-    };
+  // bind event functions
+  this._onScroll = this._onScroll.bind(this);
+  this._onResize = this._onResize.bind(this);
 
-    /*
-     * Replaces configuration values with custom ones
-     * @method _setConfigObject
-     * @param {object} obj - object containing custom options
-     */
-    var _setConfigObject = function(obj) {
-        // override with custom attributes
-        if (typeof obj === 'object') {
-            for (var key in config) {
-                if (typeof obj[key] !== 'undefined') {
-                    config[key] = obj[key];
-                }
-            }
-        }
-    };
+  // add event listeners
+  window.addEventListener('scroll', this._onScroll);
+  window.addEventListener('resize', this._onResize);
+};
 
-    /*
-     * Set styles on DOM elements
-     * @method _setElementsStyles
-     */
-    var _setElementsStyles = function() {
-        // setting progress to zero and wrapper to full width
-        progressElement.style.width = '0';
-        progressWrapper.style.width = '100%';
+/**
+ * Get vertical trajectory of the viewport
+ * @method _getViewportHeight
+ * @returns {Number}
+ */
+ScrollProgress.prototype._getViewportHeight = function() {
+  return document.body.scrollHeight - window.innerHeight;
+};
 
-        // set styles only if
-        // settings is true
-        if (config.styles) {
-            // progress element
-            progressElement.style.backgroundColor = config.color;
-            progressElement.style.height = config.height;
+/**
+ * Get horizontal trajectory of the viewport
+ * @method _getViewportWidth
+ * @returns {Number}
+ */
+ScrollProgress.prototype._getViewportWidth = function() {
+  return document.body.scrollWidth - window.innerWidth;
+};
 
-            // progress wrapper
-            progressWrapper.style.position = 'fixed';
-            progressWrapper.style.left = '0';
+/**
+ * Get scroll progress on both axis
+ * @method _getProgress
+ * @returns {Object}
+ */
+ScrollProgress.prototype._getProgress = function() {
+  var x = window.scrollX || window.pageXOffset;
+  var y = window.scrollY || window.pageYOffset;
 
-            // sets position
-            if (config.bottom) {
-                progressWrapper.style.bottom = '0';
-            } else {
-                progressWrapper.style.top = '0';
-            }
-        }
-    };
+  return {
+    x: x / this._viewportWidth,
+    y: y / this._viewportHeight
+  };
+};
 
-    /*
-     * Main function which sets all variables and bind events if needed
-     * @method _set
-     * @param {object} custom - object containing custom options
-     */
-    var _set = function(custom) {
-        // set only once
-        if (!isSet) {
-            if (custom) {
-                _setConfigObject(custom);
-            }
-            _createElements();
-            _setElementsStyles();
+/**
+ * Get scroll progress on both axis
+ * @method _getProgress
+ * @returns {undefined}
+ */
+ScrollProgress.prototype._onScroll = function() {
+  this._progress = this._getProgress();
+  this._handleUpdate(this._progress.x, this._progress.y);
+};
 
-            // set initial metrics
-            _setMetrics();
+/**
+ * Update viewport metrics, recalculate progress and call update callback
+ * @method _onResize
+ * @returns {undefined}
+ */
+ScrollProgress.prototype._onResize = function() {
+  this._viewportHeight = this._getViewportHeight();
+  this._viewportWidth = this._getViewportWidth();
 
-            // bind events only if
-            // settings is true
-            if (config.events) {
-                window.onscroll = _setProgress;
-                window.onresize = _setMetrics;
-            }
+  this._progress = this._getProgress();
 
-            isSet = true;
-        } else {
-            throw new Error('scrollProgress has already been set!');
-        }
-    };
+  // trigger update function
+  this._handleUpdate(this._progress.x, this._progress.y);
+};
 
-    /*
-     * Calculates how much user has scrolled
-     * @method _setProgress
-     */
-    var _setProgress = function() {
-        try {
-            var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            progress = y / endPoint * 100;
-            progressElement.style.width = progress + '%';
-        } catch (e) {
-            console.error(e);
-        }
-    };
+/**
+ * Trigger update callback
+ * @method trigger
+ * @returns {undefined}
+ */
+ScrollProgress.prototype.trigger = function() {
+  this._handleUpdate(this._progress.x, this._progress.y);
+};
 
-    /*
-     * Updates the document's height and adjusts the progress bar
-     * @method _setMetrics
-     */
-    var _setMetrics = function() {
-        endPoint = _getEndPoint();
-        _setProgress();
-    };
+/**
+ * Destroy scroll observer, remove listeners and update callback
+ * @method destroy
+ * @returns {undefined}
+ */
+ScrollProgress.prototype.destroy = function() {
+  window.removeEventListener('scroll', this._onScroll);
+  window.removeEventListener('resize', this._onResize);
+  this._handleUpdate = null;
+};
 
-    /*
-     * Returns how much the user can scroll in the document
-     * @method _getEndPoint
-     */
-    var _getEndPoint = function() {
-        return body.scrollHeight - (window.innerHeight || document.documentElement.clientHeight);
-    };
-
-    return {
-        set: _set,
-        trigger: _setProgress,
-        update: _setMetrics
-    };
-});
+export default ScrollProgress;
