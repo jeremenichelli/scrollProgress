@@ -1,56 +1,57 @@
-'use strict';
-
 import test from 'ava';
 import sinon from 'sinon';
+import clone from 'lodash.clone';
 
 // mock window object
-global.window = {
+const window = {
   innerWidth: 0,
   innerHeight: 0,
   scrollX: 0,
   scrollY: 0,
-  addEventListener: f => f,
-  removeEventListener: f => f
+  addEventListener() {},
+  removeEventListener() {}
 };
 
-global.document = {
+const document = {
   body: {
     scrollHeight: 0,
     scrollWidth: 0
   }
 };
 
-// requiring package after window mock up
+global.window = clone(window);
+global.document = clone(document);
+
+// requiring package after window and document mock up
 var ScrollProgress = require('../src/scrollProgress.js').default;
 
 test.afterEach(() => {
-  global.window = {
-    innerWidth: 0,
-    innerHeight: 0,
-    scrollX: 0,
-    scrollY: 0,
-    addEventListener: f => f,
-    removeEventListener: f => f
-  };
-
-  global.document = {
-    body: {
-      scrollHeight: 0,
-      scrollWidth: 0
-    }
-  };
-})
+  global.window = clone(window);
+  global.document = clone(document);
+});
 
 test('constructor registers listeners', t => {
-  window.addEventListener = sinon.spy();
+  global.window.addEventListener = sinon.spy();
 
   const dummy = new ScrollProgress();
 
-  t.deepEqual(window.addEventListener.getCall(0).args[0], 'scroll');
-  t.deepEqual(window.addEventListener.getCall(0).args[1], dummy._onScroll);
+  t.deepEqual(
+    global.window.addEventListener.getCall(0).args[0],
+    'scroll'
+  );
+  t.deepEqual(
+    global.window.addEventListener.getCall(0).args[1],
+    dummy._onScroll
+  );
 
-  t.deepEqual(window.addEventListener.getCall(1).args[0], 'resize');
-  t.deepEqual(window.addEventListener.getCall(1).args[1], dummy._onResize);
+  t.deepEqual(
+    global.window.addEventListener.getCall(1).args[0],
+    'resize'
+  );
+  t.deepEqual(
+    global.window.addEventListener.getCall(1).args[1],
+    dummy._onResize
+  );
 });
 
 test('viewport metrics are gathered correctly', t => {
@@ -128,15 +129,27 @@ test('trigger calls update method', t => {
 });
 
 test('destroy remove listeners', t => {
-  window.removeEventListener = sinon.spy();
+  global.window.removeEventListener = sinon.spy();
 
   const dummy = new ScrollProgress();
 
   dummy.destroy();
 
-  t.deepEqual(window.removeEventListener.getCall(0).args[0], 'scroll');
-  t.deepEqual(window.removeEventListener.getCall(0).args[1], dummy._onScroll);
+  t.deepEqual(
+    global.window.removeEventListener.getCall(0).args[0],
+    'scroll'
+  );
+  t.deepEqual(
+    global.window.removeEventListener.getCall(0).args[1],
+    dummy._onScroll
+  );
 
-  t.deepEqual(window.removeEventListener.getCall(1).args[0], 'resize');
-  t.deepEqual(window.removeEventListener.getCall(1).args[1], dummy._onResize);
+  t.deepEqual(
+    global.window.removeEventListener.getCall(1).args[0],
+    'resize'
+  );
+  t.deepEqual(
+    global.window.removeEventListener.getCall(1).args[1],
+    dummy._onResize
+  );
 });
