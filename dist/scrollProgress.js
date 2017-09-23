@@ -31,7 +31,7 @@
     this._progress = this._getProgress();
 
     // trigger initial update function
-    this._handleUpdate(0, this._progress);
+    this._handleUpdate(this._progress.x, this._progress.y);
 
     // bind event functions
     this._onScroll = this._onScroll.bind(this);
@@ -66,12 +66,20 @@
    * @returns {Object}
    */
   ScrollProgress.prototype._getProgress = function() {
-    var x = window.scrollX || window.pageXOffset;
-    var y = window.scrollY || window.pageYOffset;
+    var x = typeof window.scrollX === 'undefined'
+      ? window.pageXOffset
+      : window.scrollX;
+    var y = typeof window.scrollY === 'undefined'
+      ? window.pageYOffset
+      : window.scrollY;
 
     return {
-      x: x / this._viewportWidth,
-      y: y / this._viewportHeight
+      x: this._viewportWidth === 0
+        ? 0
+        : x / this._viewportWidth,
+      y: this._viewportHeight === 0
+        ? 0
+        : y / this._viewportHeight
     };
   };
 
