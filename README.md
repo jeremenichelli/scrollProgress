@@ -95,7 +95,7 @@ export default class ScrollProgress extends Component {
 
   componentDidMount() {
     this.progressObserver = new ScrollProgress((x, y) => {
-      this.setState({ progress: y });
+      this.setState({ progress: y * 100 });
     });
   }
 
@@ -110,7 +110,7 @@ export default class ScrollProgress extends Component {
       position: 'fixed',
       top: 0,
       bottom: 0,
-      width: this.state.progress
+      width: `${this.state.progress}%`
     };
 
     return (
