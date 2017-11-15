@@ -75,10 +75,10 @@ What if you don't like inline styles and you want to handle the look of it in yo
 scrollProgress.set({ styles: false });
 ```
 
-The only thing that the script will control will be the width of the progress bar as you scroll, the rest of the styling is all on you. _Remember that the script won't put any styles at all so make sure to position the bar as fixed in your page or you won't be able to see it._
+_Remember the only thing that the script will control will be the width of the progress bar as you scroll, the rest of the styling is all on you._
 
 
-### Scroll bar component
+### As a React component
 
 One of the main reasons this library was moved to this new approach is because you can easily couple an observer with any component library used nowadays. For example, create a React scroll bar component.
 
