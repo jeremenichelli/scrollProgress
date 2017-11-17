@@ -69,12 +69,6 @@ const progressObserver = new ScrollProgress((x, y) => {
 
 And that's it! Super simple.
 
-What if you don't like inline styles and you want to handle the look of it in your CSS style sheet, then you just need to pass a **styles** flag and set it to ```false```.
-
-```js
-scrollProgress.set({ styles: false });
-```
-
 _Remember the only thing that the script will control will be the width of the progress bar as you scroll, the rest of the styling is all on you._
 
 
