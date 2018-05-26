@@ -83,7 +83,7 @@ import ScrollProgress from 'scrollprogress';
 export default class ScrollProgress extends Component {
   constructor() {
     this.state = {
-      progress: 0;
+      progress: 0
     };
   }
 
