@@ -27,11 +27,15 @@
     // set initial values
     this._viewportHeight = this._getViewportHeight();
     this._viewportWidth = this._getViewportWidth();
+    this._scrollHeight = document.body.scrollHeight;
+    this._scrollWidth = document.body.scrollWidth;
+    this._innerHeight = window.innerHeight;
+    this._innerWidth = window.innerWidth;
 
     this._progress = this._getProgress();
 
     // trigger initial update function
-    this._handleUpdate(this._progress.x, this._progress.y);
+    this._handleUpdate(this._progress.x, this._progress.y, this._progress.xmin, this._progress.xmax, this._progress.ymin, this._progress.ymax);
 
     // bind event functions
     this._onScroll = this._onScroll.bind(this);
@@ -79,7 +83,19 @@
         : x / this._viewportWidth,
       y: this._viewportHeight === 0
         ? 0
-        : y / this._viewportHeight
+        : y / this._viewportHeight,
+      xmin: this._scrollWidth === this._innerWidth
+        ? 0
+        : x / this._scrollWidth,
+      xmax: this._scrollWidth === this._innerWidth
+        ? 0
+        : (x + this._innerWidth) / this._scrollWidth,
+      ymin: this._scrollHeight === this._innerHeight
+        ? 0
+        : y / this._scrollHeight,
+      ymax: this._scrollHeight === this._innerHeight
+        ? 0
+        : (y + this._innerHeight) / this._scrollHeight
     };
   };
 
@@ -90,7 +106,7 @@
    */
   ScrollProgress.prototype._onScroll = function() {
     this._progress = this._getProgress();
-    this._handleUpdate(this._progress.x, this._progress.y);
+    this._handleUpdate(this._progress.x, this._progress.y, this._progress.xmin, this._progress.xmax, this._progress.ymin, this._progress.ymax);
   };
 
   /**
@@ -101,11 +117,15 @@
   ScrollProgress.prototype._onResize = function() {
     this._viewportHeight = this._getViewportHeight();
     this._viewportWidth = this._getViewportWidth();
+    this._scrollHeight = document.body.scrollHeight;
+    this._scrollWidth = document.body.scrollWidth;
+    this._innerHeight = window.innerHeight;
+    this._innerWidth = window.innerWidth;
 
     this._progress = this._getProgress();
 
     // trigger update function
-    this._handleUpdate(this._progress.x, this._progress.y);
+    this._handleUpdate(this._progress.x, this._progress.y, this._progress.xmin, this._progress.xmax, this._progress.ymin, this._progress.ymax);
   };
 
   /**
@@ -114,7 +134,7 @@
    * @returns {undefined}
    */
   ScrollProgress.prototype.trigger = function() {
-    this._handleUpdate(this._progress.x, this._progress.y);
+    this._handleUpdate(this._progress.x, this._progress.y, this._progress.xmin, this._progress.xmax, this._progress.ymin, this._progress.ymax);
   };
 
   /**
